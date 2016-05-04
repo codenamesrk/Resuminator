@@ -31,8 +31,54 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
         ],
 
+        'noCsrf' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,        
+        ],
+
         'api' => [
             'throttle:60,1',
+        ],
+
+        'admin' => [
+            'web',
+            'auth',
+            'role:admin',
+        ],
+
+        'user' => [
+            'web',
+            'auth',
+            'role:user',
+        ],        
+
+        'editable' => [
+            \App\Http\Middleware\ReportEditable::class,
+        ],
+
+        'paid' => [
+            \App\Http\Middleware\HasPaid::class,
+        ],
+
+        'uploaded' => [
+            \App\Http\Middleware\HasUploadedResume::class,
+        ],
+        'paycheck' => [
+            \App\Http\Middleware\PaymentCheck::class,
+        ],
+        'completed' => [
+            'paid',
+            'uploaded'            
+        ],
+        'loggedIn' => [
+            \App\Http\Middleware\RedirectVerifiedUser::class,
+        ],
+        'payment' => [
+            'auth',
+            'role:admin',
+            \App\Http\Middleware\VerifyCsrfMiddleware::class,  
         ],
     ];
 
@@ -48,5 +94,8 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
+        'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
+        'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,        
     ];
 }

@@ -13,9 +13,16 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        'App\Events\ReportGenerated' => [
+            'App\Listeners\NotifyUser',
         ],
+        'App\Events\ResumeUploaded' => [
+            'App\Listeners\RegisterResume',
+        ],        
+    ];
+
+    protected $subscribe = [
+        'App\Listeners\UserEventListener',
     ];
 
     /**
@@ -27,7 +34,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-
-        //
     }
 }
