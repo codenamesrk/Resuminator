@@ -67,8 +67,6 @@ class RolesPermissionsSeeder extends Seeder
 		$user->save();
 
 		$user->attachRole($admin);
-
-		// Creating Parameters
-        factory(App\Parameter::class,6)->create();								 
+								 
     }
 }
