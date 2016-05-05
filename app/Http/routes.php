@@ -29,7 +29,7 @@
 |
 */
 
-Route::group([ 'domain' => 'pacific-hamlet-95672.herokuapp.com', 'as' => 'user::' ], function(){	
+Route::group([ 'as' => 'user::' ], function(){	
 
 	Route::group(['middleware' => ['web']], function(){
 		// Auth Route
