@@ -68,7 +68,7 @@ Route::group([ 'as' => 'user::' ], function(){
 });
 
 
-Route::group(['domain' => 'admin.pacific-hamlet-95672.herokuapp.com', 'as' => 'admin::'], function () {
+Route::group([ 'as' => 'admin::'], function () {
 	Route::group([ 'middleware' => ['web']], function () {
 		// Auth Route
 		Route::auth();
