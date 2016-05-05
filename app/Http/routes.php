@@ -29,7 +29,7 @@
 |
 */
 
-Route::group([ 'domain' => 'resume.dev', 'as' => 'user::' ], function(){	
+Route::group([ 'domain' => 'recipes.ly', 'as' => 'user::' ], function(){	
 
 	Route::group(['middleware' => ['web']], function(){
 		// Auth Route
@@ -68,7 +68,7 @@ Route::group([ 'domain' => 'resume.dev', 'as' => 'user::' ], function(){
 });
 
 
-Route::group(['domain' => 'admin.resume.dev', 'as' => 'admin::'], function () {
+Route::group(['domain' => 'admin.recipes.ly', 'as' => 'admin::'], function () {
 	Route::group([ 'middleware' => ['web']], function () {
 		// Auth Route
 		Route::auth();
