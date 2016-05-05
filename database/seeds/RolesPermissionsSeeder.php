@@ -62,10 +62,6 @@ class RolesPermissionsSeeder extends Seeder
 		$addEditor->save();	
 
 		$user = App\User::first();
-		$user->email = 'admin@superuser.com';
-		$user->password = Hash::make('srijit777');
-		$user->save();
-
 		$user->attachRole($admin);
 								 
     }

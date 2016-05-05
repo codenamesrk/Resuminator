@@ -16,8 +16,8 @@ class UsersSeeder extends Seeder
     {
 		// factory(App\Profile::class,1)->create();    
 		$user = new User();    
-        $user->email = 'admin@superman.com';
-        $user->password = bcrypt(str_random(10));
+        $user->email = 'admin@superuser.com';
+        $user->password = Hash::make('srijit777');
         $user->remember_token = str_random(10);
         $user->verification_code = str_random(10);
         $user->save();
