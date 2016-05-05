@@ -29,7 +29,7 @@
 |
 */
 
-Route::group([ 'domain' => 'recipes.ly', 'as' => 'user::' ], function(){	
+Route::group([ 'domain' => 'pacific-hamlet-95672.herokuapp.com', 'as' => 'user::' ], function(){	
 
 	Route::group(['middleware' => ['web']], function(){
 		// Auth Route
@@ -68,7 +68,7 @@ Route::group([ 'domain' => 'recipes.ly', 'as' => 'user::' ], function(){
 });
 
 
-Route::group(['domain' => 'admin.recipes.ly', 'as' => 'admin::'], function () {
+Route::group(['domain' => 'admin.pacific-hamlet-95672.herokuapp.com', 'as' => 'admin::'], function () {
 	Route::group([ 'middleware' => ['web']], function () {
 		// Auth Route
 		Route::auth();
