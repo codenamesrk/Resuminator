@@ -34,7 +34,7 @@
                                     <td>{{ ++$index }}</td>
                                     <td>{{ $payment->transaction_id }}</td>
                                     <td>{{ $payment->user->email }}</td>
-                                    <td>{{ $payment->resume->name }}</td>                                    
+                                    <td>{{ $payment->resume ? $payment->resume->name : 'unlisted' }}</td>                                    
                                     <td>{{ $payment->created_at }}</td>
                                 </tr>
                                 @endforeach
