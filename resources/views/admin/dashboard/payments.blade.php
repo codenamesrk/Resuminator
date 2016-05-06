@@ -28,6 +28,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($payments)
                                 @foreach ($payments as $index => $payment)
                                 <tr>
                                     <td>{{ ++$index }}</td>
@@ -37,6 +38,9 @@
                                     <td>{{ $payment->created_at }}</td>
                                 </tr>
                                 @endforeach
+                                @else
+                                Nothing to show
+                                @endif
                             </tbody>
                         </table>                        
                     </div>
