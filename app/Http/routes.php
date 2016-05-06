@@ -29,7 +29,7 @@
 |
 */
 
-Route::group(['domain' => 'recipes.ly', 'as' => 'user::' ], function(){	
+Route::group(['as' => 'user::' ], function(){	
 
 	Route::group(['middleware' => ['web']], function(){
 		// Auth Route
