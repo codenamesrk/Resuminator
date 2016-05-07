@@ -161,7 +161,7 @@ class AdminController extends Controller
             $fileName = 'Report-' . ++$count;
             
             // Store the resume on storage/app/resumes
-            Storage::disk('files')->put('reports/' . $fileName . '.' . $extension, File::get($file));
+            Storage::put('reports/' . $fileName . '.' . $extension, File::get($file));
         }
 
         $report = Report::create([

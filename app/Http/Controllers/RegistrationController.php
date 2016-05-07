@@ -215,7 +215,7 @@ class RegistrationController extends Controller
 
         
         // Store the resume on storage/app/resumes
-        Storage::disk('files')->put('resumes/' . $fileName . '.' . $extension, File::get($file));
+        Storage::put('resumes/' . $fileName . '.' . $extension, File::get($file));
         
         // Fire Event to register the resume with User
         Event::fire(new ResumeUploaded($user, $fileName, $fileAlias, $parent));

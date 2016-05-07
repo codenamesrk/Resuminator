@@ -35,6 +35,7 @@ class RegisterResume
         ]);
         $event->user->resumes()->save($resume);
         $payment = $event->user->payments()->get()->last();
-        $payment->resume()->save($resume);
+        $payment->resume_id = $resume->id;
+        $payment->save();
     }
 }
