@@ -71,7 +71,7 @@ return [
             'driver'   => 'ftp',
             'host'     => 'gator3154.hostgator.com',
             'username' => 'srijit@livethebuzz.com',
-            'password' => 'adminsrk#777',
+            'password' => 'adminsrk#777',            
         ],
 
     ],

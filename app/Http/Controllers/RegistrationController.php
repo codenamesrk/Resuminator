@@ -200,7 +200,7 @@ class RegistrationController extends Controller
         $iteration = $number->format($count + 1);        
         $fileAlias = 'resume-draft-'. $iteration; 
 
-        // Determine if Parent or Child
+        // Determine if First Time or Subsequent upload
         if($count >= 2 ) 
         {
             if( $user->resumes()->get()->last()->review_id === 4)
