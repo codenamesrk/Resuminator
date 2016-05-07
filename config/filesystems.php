@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'sftp',
+    'default' => 'ftp',
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
             'bucket' => 'your-bucket',
         ],
 
-        'sftp' => [
+        'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'gator3154.hostgator.com',
             'username' => 'srijit@livethebuzz.com',
