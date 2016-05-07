@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'ftp',
+    'default' => 'sftp',
 
     /*
     |--------------------------------------------------------------------------
@@ -67,17 +67,11 @@ return [
             'bucket' => 'your-bucket',
         ],
 
-        'ftp' => [
+        'sftp' => [
             'driver'   => 'ftp',
             'host'     => 'gator3154.hostgator.com',
             'username' => 'srijit@livethebuzz.com',
             'password' => 'adminsrk#777',
-            // Optional FTP Settings...
-            // 'port'     => 21,
-            // 'root'     => '',
-            // 'passive'  => true,
-            // 'ssl'      => true,
-            // 'timeout'  => 30,
         ],
 
     ],
