@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
 		$this->call(RolesPermissionsSeeder::class);
         $this->call(ParameterSeeder::class);
 		$this->call(ResumeReviewSeeder::class);
-        $this->call(StorageSeeder::class);   
+        // $this->call(StorageSeeder::class);   
     }
 }
