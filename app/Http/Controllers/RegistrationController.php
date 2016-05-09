@@ -184,7 +184,7 @@ class RegistrationController extends Controller
     public function submit(Request $request)
     {
         $user = Auth::user();
-        $number = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
+        $number = new NumberFormatter("en", NumberFormatter::SPELLOUT);
         $resumeCount = $this->resume->getCount();
         $user->has_uploaded = true;
         $user->save();
