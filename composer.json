@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "ext-ftp": "*",
+        "ext-intl": "*",
         "laravel/framework": "5.2.*",
         "codeception/codeception": "*",
         "zizaco/entrust": "5.2.x-dev",
