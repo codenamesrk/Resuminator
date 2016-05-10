@@ -10,7 +10,7 @@ return [
     |   view    = File
     */
 
-    'gateway' => 'payumoney',                // Replace with the name of appropriate gateway
+    'gateway' => env('INDIPAY_GATEWAY','payumoney'),                // Replace with the name of appropriate gateway
 
     'testMode'  => true,                   // True for Testing the Gateway [For production false]
 
