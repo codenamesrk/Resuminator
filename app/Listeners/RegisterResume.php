@@ -30,9 +30,11 @@ class RegisterResume
         $resume = Resume::create([
             'name' => $event->fileAlias,
             'original_name' => $event->originalName,
-            'review_id' => 1,
             'parent' => $event->parent,            
         ]);
+        $review = Review::whereName('not_reviewed')->first();
+        $resume->review()->save($review);
+
         $event->user->resumes()->save($resume);
         $payment = $event->user->payments()->get()->last();
         $payment->resume_id = $resume->id;

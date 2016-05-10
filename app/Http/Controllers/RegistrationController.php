@@ -80,32 +80,42 @@ class RegistrationController extends Controller
 
         $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);        
         $user = Auth::user();
-        $user->has_paid = true;
-        $user->save();
-        // $order_id = Payment::all()->count() + 1;
-        // $parameters = [
-        //     'tid' => $txnid,
-        //     'order_id' => $order_id,
-        //     'amount' => 1500,
-        //     'firstname' => $user->profile->first_name,
-        //     'email' => $user->email,
-        //     'phone' => $user->profile->mobile,
-        //     'productinfo' => 'Dummy Product',
-        // ];
-        // $order = Indipay::prepare($parameters);
-        // return Indipay::process($order);
-        $payment = new Payment();
-        $payment->user_id = $user->id;
-        $payment->transaction_id = $txnid;            
-        $payment->save();
+        // $user->has_paid = true;
+        // $user->save();
         
-        return redirect()->route('user::invite.contacts');
+        $order_id = Payment::all()->count() + 1;
+        $parameters = [
+            'tid' => $txnid,
+            'order_id' => $order_id,
+            'amount' => 1500,
+            'firstname' => $user->profile->first_name,
+            'email' => $user->email,
+            'phone' => $user->profile->mobile,
+            'productinfo' => 'Dummy Product',
+        ];
+        $order = Indipay::prepare($parameters);
+        return Indipay::process($order);
+        // $payment = new Payment();
+        // $payment->user_id = $user->id;
+        // $payment->transaction_id = $txnid;            
+        // $payment->save();
+        
+        // return redirect()->route('user::invite.contacts');
     }
 
     public function response(Request $request)
     {        
         $response = Indipay::response($request);
+
         dd($response);
+
+        $payment = new Payment();
+        $payment->user_id = $user->id;
+        $payment->transaction_id = $txnid;            
+        $payment->save();
+        
+
+        return redirect()->route('user::invite.contacts');
     }
 
     public function invite()

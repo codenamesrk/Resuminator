@@ -29,7 +29,7 @@
 |
 */
 
-Route::group(['domain' => 'pregnancy.ly', 'as' => 'user::' ], function(){	
+Route::group(['domain' => env('CLIENT_URL','pregnancy.ly'), 'as' => 'user::' ], function(){	
 
 	Route::group(['middleware' => ['web']], function(){
 		// Auth Route
@@ -68,7 +68,7 @@ Route::group(['domain' => 'pregnancy.ly', 'as' => 'user::' ], function(){
 });
 
 
-Route::group(['domain' => 'admin.pregnancy.ly', 'as' => 'admin::'], function () {
+Route::group(['domain' => env('ADMIN_URL','admin.pregnancy.ly'), 'as' => 'admin::'], function () {
 	Route::group([ 'middleware' => ['web']], function () {
 		// Auth Route
 		Route::auth();
