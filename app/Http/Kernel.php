@@ -77,7 +77,7 @@ class Kernel extends HttpKernel
         ],
         'payment' => [
             'auth',
-            'role:admin',
+            'role:user',
             \App\Http\Middleware\VerifyCsrfMiddleware::class,  
         ],
     ];
