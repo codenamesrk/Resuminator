@@ -63,7 +63,7 @@ Route::group(['domain' => env('CLIENT_URL','pregnancy.ly'), 'as' => 'user::' ], 
 	});
 
 	Route::group(['middleware' => ['payment']], function(){		
-		Route::post('payment/response', [ 'as' => 'payment.response', 'uses' => 'RegistrationController@postPayment' ]);
+		Route::post('payment/response', [ 'as' => 'payment.response', 'uses' => 'RegistrationController@paymentResponse' ]);
 	});
 });
 

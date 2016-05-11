@@ -103,7 +103,7 @@ class RegistrationController extends Controller
         // return redirect()->route('user::invite.contacts');
     }
 
-    public function response(Request $request)
+    public function paymentResponse(Request $request)
     {        
         $response = Indipay::response($request);
 
