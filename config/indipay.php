@@ -31,7 +31,8 @@ return [
         'merchantKey'  => env('INDIPAY_MERCHANT_KEY', ''),
         'salt'  => env('INDIPAY_SALT', ''),
         'workingKey' => env('INDIPAY_WORKING_KEY', ''),
-
+        'testEndPoint' => env('INDIPAY_TEST_ENDPOINT','https://test.payu.in/_payment'),
+        'liveEndPoint' => env('INDIPAY_LIVE_ENDPOINT','https://secure.payu.in/_payment'),
         // Should be route address for url() function
         'successUrl' => env('INDIPAY_SUCCESS_URL', 'indipay/response'),
         'failureUrl' => env('INDIPAY_FAILURE_URL', 'indipay/response'),
