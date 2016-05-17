@@ -79,7 +79,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
             $hash_string .= '|';
         }
 
-        $this->parameters['txnref'] = strtolower(hash('sha512', $hash_string));        
+        $this->parameters['txnref'] = hash('sha512', $hash_string);        
     }
 
     protected function decrypt($response)
