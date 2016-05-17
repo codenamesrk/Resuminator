@@ -161,6 +161,7 @@ return [
         Softon\Indipay\IndipayServiceProvider::class,
         Artdarek\OAuth\OAuthServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        App\Providers\PaymentServiceProvider::class,
     ],
 
     /*

@@ -62,8 +62,8 @@ Route::group(['domain' => env('CLIENT_URL','pregnancy.ly'), 'as' => 'user::' ], 
 		Route::post('report/file/{file}', [ 'as' => 'report.file', 'uses' => 'UserController@getFile' ]);
 	});
 
-	Route::group(['middleware' => ['payment']], function(){		
-		Route::get('payment/response', [ 'as' => 'payment.response', 'uses' => 'RegistrationController@paymentResponse' ]);
+	Route::group([], function(){		
+		Route::post('payment/response', [ 'as' => 'payment.response', 'uses' => 'RegistrationController@paymentResponse' ]);
 	});
 });
 
@@ -73,9 +73,10 @@ Route::group(['domain' => env('ADMIN_URL','admin.pregnancy.ly'), 'as' => 'admin:
 		// Auth Route
 		Route::auth();
 		// App Routes
-		Route::get('/', [ 'as' => 'dashboard', 'uses' => 'AdminController@welcome' ]);
+		
 	});
 	Route::group(['middleware' => ['admin']], function(){
+		Route::get('/', [ 'as' => 'dashboard', 'uses' => 'AdminController@welcome' ]);
 	    // Route::get('home', [ 'as' => 'dashboard', 'uses' => 'AdminController@index' ]);
 	    Route::get('users', [ 'as' => 'dashboard.users', 'uses' => 'AdminController@getUsers' ]);
 	    Route::get('users/{user}/timeline', [ 'as' => 'dashboard.user.timeline', 'uses' => 'AdminController@getUserTimeline' ]);

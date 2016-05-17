@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Auth;
 
 class Handler extends ExceptionHandler
 {
@@ -48,6 +49,13 @@ class Handler extends ExceptionHandler
         if($e instanceof AuthorizationException )
         {
             return response()->view('errors.503', [], 403);
+        }
+            // handle 403 errors
+        if ($e instanceof HttpException && $e->getStatusCode()==403) 
+        {
+
+            Auth::logout();
+
         }
         return parent::render($request, $e);
     }

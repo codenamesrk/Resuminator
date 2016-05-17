@@ -15,6 +15,7 @@ use App\Profile;
 use App\Role;
 use App\Payment;
 use Softon\Indipay\Facades\Indipay;
+use App\PaymentSupport\Itdprocess\Facades\Itdprocess;
 
 class RegistrationController extends Controller
 {
@@ -71,11 +72,22 @@ class RegistrationController extends Controller
 
     public function getPayment()
     {
-        return view('user.payment', ['user' => Auth::user()]);
+        $user = Auth::User();
+        $parameters = [
+            'famount' => 1500,
+            'fname' => $user->profile->first_name,
+            'femail' => $user->email,
+            'fphone' => $user->profile->mobile,
+            'productinfo' => 'Dummy Product',
+        ];
+        $order = Itdprocess::prepare($parameters);       
+        return Itdprocess::process($order);
+        // return view('user.payment', ['user' => Auth::user()]);
     }
 
     public function postPayment(Request $request)
     {   
+       
         // Uncomment before pushing to production server    
         $user = Auth::user();
         $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);  
@@ -112,13 +124,15 @@ class RegistrationController extends Controller
 
     public function paymentResponse(Request $request)
     {        
-        $response = Indipay::response($request);
+        $response = Itdprocess::response($request);
+        // $response = Indipay::response($request);
 
-        dd($response);
-
+        // dd($response);
+        $user = Auth::User();
         $payment = new Payment();
         $payment->user_id = $user->id;
-        $payment->transaction_id = $txnid;            
+        $payment->transaction_id = $request->txnid;
+        $payment->amount = $request->famout;            
         $payment->save();
         
 

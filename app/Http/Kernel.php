@@ -45,7 +45,8 @@ class Kernel extends HttpKernel
         'admin' => [
             'web',
             'auth',
-            'role:admin',
+            'adminCheck',
+            // 'role:admin',
         ],
 
         'user' => [
@@ -80,6 +81,9 @@ class Kernel extends HttpKernel
             'role:user',
             \App\Http\Middleware\VerifyCsrfMiddleware::class,  
         ],
+        'adminCheck' => [
+            \App\Http\Middleware\AdminCheck::class,  
+        ]
     ];
 
     /**
