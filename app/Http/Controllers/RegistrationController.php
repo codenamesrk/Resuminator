@@ -73,6 +73,13 @@ class RegistrationController extends Controller
     public function getPayment()
     {
         $user = Auth::User();
+
+        return view('user.payment', ['user' => Auth::user()]);
+    }
+
+    public function postPayment(Request $request)
+    {   
+        $user = Auth::User();
         $parameters = [
             'famount' => 1500,
             'fname' => $user->profile->first_name,
@@ -81,45 +88,40 @@ class RegistrationController extends Controller
             'productinfo' => 'Dummy Product',
         ];
         $order = Itdprocess::prepare($parameters);       
-        return Itdprocess::process($order);
-        // return view('user.payment', ['user' => Auth::user()]);
-    }
-
-    public function postPayment(Request $request)
-    {   
+        return Itdprocess::process($order);        
        
-        // Uncomment before pushing to production server    
-        $user = Auth::user();
-        $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);  
-        $orderid = date("Y")."/".date("m")."/".date("d")."/".$txnid;
-        $sitekey = 'K&lQ89nJpPZ';
-        $famount = strval(1500);
-        $hashtest= $user->profile->first_name.'|'.$user->profile->mobile.'|'.$user->email.'|'.$famount.'|'.$orderid.'|'.$sitekey;
-        $hashtestoutput = hash("sha512", $hashtest);
-        $txnref=$hashtestoutput;      
+        // // Uncomment before pushing to production server    
+        // $user = Auth::user();
+        // $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);  
+        // $orderid = date("Y")."/".date("m")."/".date("d")."/".$txnid;
+        // $sitekey = 'K&lQ89nJpPZ';
+        // $famount = strval(1500);
+        // $hashtest= $user->profile->first_name.'|'.$user->profile->mobile.'|'.$user->email.'|'.$famount.'|'.$orderid.'|'.$sitekey;
+        // $hashtestoutput = hash("sha512", $hashtest);
+        // $txnref=$hashtestoutput;      
 
-        // $user->has_paid = true;
-        // $user->save();
+        // // $user->has_paid = true;
+        // // $user->save();
         
-        $order_id = Payment::all()->count() + 1;
-        $parameters = [
-            'sitekey' => $sitekey,
-            'txnref' => $txnref,
-            'orderid' => $order_id,
-            'famount' => 1500,
-            'fname' => $user->profile->first_name,
-            'femail' => $user->email,
-            'fphone' => $user->profile->mobile,
-            'productinfo' => 'Dummy Product',
-        ];
-        $order = Indipay::prepare($parameters);
-        return Indipay::process($order);
-        // $payment = new Payment();
-        // $payment->user_id = $user->id;
-        // $payment->transaction_id = $txnid;            
-        // $payment->save();
+        // $order_id = Payment::all()->count() + 1;
+        // $parameters = [
+        //     'sitekey' => $sitekey,
+        //     'txnref' => $txnref,
+        //     'orderid' => $order_id,
+        //     'famount' => 1500,
+        //     'fname' => $user->profile->first_name,
+        //     'femail' => $user->email,
+        //     'fphone' => $user->profile->mobile,
+        //     'productinfo' => 'Dummy Product',
+        // ];
+        // $order = Indipay::prepare($parameters);
+        // return Indipay::process($order);
+        // // $payment = new Payment();
+        // // $payment->user_id = $user->id;
+        // // $payment->transaction_id = $txnid;            
+        // // $payment->save();
         
-        // return redirect()->route('user::invite.contacts');
+        // // return redirect()->route('user::invite.contacts');
     }
 
     public function paymentResponse(Request $request)
