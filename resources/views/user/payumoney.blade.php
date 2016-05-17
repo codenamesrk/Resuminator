@@ -10,7 +10,8 @@
         <input type=hidden name="fname" value="{{ $parameters['fname'] }}">
         <input type=hidden name="femail" value="{{ $parameters['femail'] }}">
         <input type=hidden name="fphone" value="{{ $parameters['fphone'] }}">
-        <input type=hidden name="productinfo" value="{{ $parameters['productinfo'] }}">
+        <input type="hidden" name="orderid" value="{{ $parameters['orderid'] }}">
+        <input type="hidden" name="productinfo" value="{{ $parameters['productinfo'] }}">
 
 {{--         <input type=hidden name="lastname" value="{{ $parameters['lastname'] or '' }}">
         <input type=hidden name="curl" value="{{ $parameters['curl'] or '' }}">
