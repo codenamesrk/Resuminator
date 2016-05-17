@@ -111,7 +111,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
     public function response($request)
     {
         $refUrl = parse_url($request->server('HTTP_REFERER'));
-
+        dd($refUrl);
         if( $refUrl != env('PAYMENT_ROOT_URL') )
         {
             dd('You ain\'t supposed to be here');

@@ -137,7 +137,7 @@ class RegistrationController extends Controller
         $payment->amount = $request->famout;            
         $payment->save();
         
-
+        dd($response);
         return redirect()->route('user::invite.contacts');
     }
 
