@@ -16,7 +16,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
                 $testMode,
                 $liveEndPoint,
                 $testEndPoint;
-    public  $response = '';
+    public  $refUrl, $response = '';
 
     function __construct()
     {
@@ -110,16 +110,16 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
 
     public function response($request)
     {
-        $refUrl = parse_url($request->server('HTTP_REFERER'));
-        dd($refUrl);
-        if( $refUrl != env('PAYMENT_ROOT_URL') )
+        $this->refUrl = parse_url($request->server('HTTP_REFERER'));
+        dd($this->refUrl);
+        if( $this->refUrl != env('PAYMENT_ROOT_URL') )
         {
             dd('You ain\'t supposed to be here');
         } else {            
-            $response = $request->all();
+            $this->response = $request->all();
             $response_hash = $this->decrypt($response);
 
-            if($response_hash != $response['txnref']){
+            if($response_hash != $this->response['txnref']){
                 return 'Hash Mismatch Error';
             } else {
                 return $response; 
