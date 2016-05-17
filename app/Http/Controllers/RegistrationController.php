@@ -82,13 +82,12 @@ class RegistrationController extends Controller
         // dd($request->all());
         $user = Auth::User();
         $parameters = [
-            'fname' => 'Tyrion',
-            'fphone' => '8798912145',
-            'femail' => 'tyrion777@lannister.com',
+            'fname' => $request->fname,
+            'fphone' => $request->fphone,
+            'femail' => $request->femail,
             'famount' => 1500,
         ];
         $order = Itdprocess::prepare($parameters);       
-        dd($order);
         return Itdprocess::process($order);        
        
         // // Uncomment before pushing to production server    
