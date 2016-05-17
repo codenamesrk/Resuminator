@@ -79,12 +79,13 @@ class RegistrationController extends Controller
 
     public function postPayment(Request $request)
     {   
+        
         $user = Auth::User();
         $parameters = [
             'famount' => 1500,
-            'fname' => $user->profile->first_name,
-            'femail' => $user->email,
-            'fphone' => $user->profile->mobile,
+            'fname' => $request->fname,
+            'femail' => $request->femail,
+            'fphone' => $request->fphone,
             'productinfo' => 'Dummy Product',
         ];
         $order = Itdprocess::prepare($parameters);       

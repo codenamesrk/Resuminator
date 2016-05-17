@@ -37,7 +37,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
     }
 
     public function send()
-    {
+    {        
         Log::info('Payment Request towards Itdprocess Initiated: ');
         return view('user.payumoney')->with('parameters',$this->parameters)
                                      ->with('endPoint',$this->getEndPoint());        

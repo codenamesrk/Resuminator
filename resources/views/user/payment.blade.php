@@ -42,7 +42,10 @@
                 	<h2>Payment Details</h2>
                 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit dolore nihil consectetur voluptate ea omnis eaque soluta, excepturi recusandae modi quos quisquam, similique at, illo in quis possimus quia iste.</p>
                 	<form role="form" action="{{ route('user::payment.post.resume') }}" method="post">
-                	{!! csrf_field() !!}                	     	                
+                	{!! csrf_field() !!}
+                  <input type="hidden" name="femail" value="{{ $user->email }}">
+                  <input type="hidden" name="fname" value="{{ $user->profile->first_name }}">
+                  <input type="hidden" name="fphone" value="{{ $user->profile->mobile }}">               	     	                
                 	<input type="submit" class="btn btn-success" value="Pay Now">
                 	</form>
                 </div>
