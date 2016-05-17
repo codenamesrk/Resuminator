@@ -56,12 +56,10 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
             'fname' => 'required',
             'femail' => 'required',
             'fphone' => 'required',
-            'productinfo' => 'required',
             'famount' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
-            // throw new IndipayParametersMissingException;
             abort(403, 'Unauthorized action.');
         }
 
@@ -78,8 +76,9 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
             $hash_string .= isset($this->parameters[$hash_var]) ? $this->parameters[$hash_var] : '';
             $hash_string .= '|';
         }
-
-        $this->parameters['txnref'] = hash('sha512', $hash_string);        
+        $hash_string = trim($hash_string,'|');
+        $this->parameters['txnref'] = $hash_string;        
+        // $this->parameters['txnref'] = hash('sha512', $hash_string);        
     }
 
     protected function decrypt($response)
@@ -96,7 +95,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
 
         $hash_string = trim($hash_string,'|');
 
-        return strtolower(hash('sha512', $hash_string));        
+        return hash('sha512', $hash_string);        
     }
 
     public function generateTransactionID()

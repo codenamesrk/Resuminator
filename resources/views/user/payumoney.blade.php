@@ -4,12 +4,11 @@
 </head>
 <body>
     <form method="post" name="payuform" action="{{ $endPoint }}">
-        <input type=hidden name="sitekey" value="{{ $parameters['sitekey'] }}">
-        <input type=hidden name="txnref" value="{{ $parameters['txnref'] }}">
-        <input type=hidden name="famount" value="{{ $parameters['famount'] }}">
-        <input type=hidden name="fname" value="{{ $parameters['fname'] }}">
-        <input type=hidden name="femail" value="{{ $parameters['femail'] }}">
-        <input type=hidden name="fphone" value="{{ $parameters['fphone'] }}">
+        <input type="hidden" name="txnref" value="{{ $parameters['txnref'] }}">
+        <input type="hidden" name="famount" value="{{ $parameters['famount'] }}">
+        <input type="hidden" name="fname" value="{{ $parameters['fname'] }}">
+        <input type="hidden" name="femail" value="{{ $parameters['femail'] }}">
+        <input type="hidden" name="fphone" value="{{ $parameters['fphone'] }}">
         <input type="hidden" name="orderid" value="{{ $parameters['orderid'] }}">
 
 {{--         <input type=hidden name="lastname" value="{{ $parameters['lastname'] or '' }}">
