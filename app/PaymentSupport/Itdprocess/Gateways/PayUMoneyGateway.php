@@ -70,7 +70,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
     protected function encrypt()
     {
         $this->hash = '';
-        $hashSequence = "sitekey|famount|productinfo|fname|femail";
+        $hashSequence = "fname|fphone|femail|famount|orderid|sitekey";
         $hashVarsSeq = explode('|', $hashSequence);
         $hash_string = '';
 
@@ -84,7 +84,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
 
     protected function decrypt($response)
     {
-        $hashSequence = "fname|fphone|femail|orderid|txnid|paymentstatus|payuMoneyId|sitekey";
+        $hashSequence = "fname|fphone|femail|famount|orderid|txnid|paymentstatus|payuMoneyId|sitekey";
         // $hashSequence = "sitekey|famount|productinfo|fname|femail";
         $hashVarsSeq = explode('|', $hashSequence);
         $hash_string = '';
