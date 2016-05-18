@@ -122,7 +122,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
             $this->response = $request->all();
             $response_hash = $this->decrypt($this->response);
 
-            if($response_hash != $this->response['hash']){
+            if($response_hash != $this->response['txnref']){
                 return 'Hash Mismatch Error';
             } else {
                 return $this->response; 
