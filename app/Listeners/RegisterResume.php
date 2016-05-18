@@ -28,11 +28,17 @@ class RegisterResume
      */
     public function handle(ResumeUploaded $event)
     {
-        $resume = Resume::create([
-            'name' => $event->fileAlias,
-            'original_name' => $event->originalName,
-            'parent' => $event->parent,            
-        ]);
+        // $resume = Resume::create([
+        //     'name' => $event->fileAlias,
+        //     'original_name' => $event->originalName,
+        //     'parent' => $event->parent,            
+        // ]);
+        $resume = new Resume();
+        $resume->name = $event->fileAlias;
+        $resume->original_name = $event->originalName;
+        $resume->parent = $event->parent;
+        $resume->save();
+        
         $review = Review::whereName('not_reviewed')->first();
         $resume->review()->save($review);
 
