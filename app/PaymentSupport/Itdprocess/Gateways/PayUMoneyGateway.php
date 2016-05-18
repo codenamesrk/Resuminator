@@ -112,7 +112,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
     {
         // dd($request->server->get('SERVER_NAME'));
         // dd(Request::server('HTTP_REFERER'));
-        dd($request . '-------' . $request->header('User-Agent'));
+        dd($request->server);
         if( $this->refUrl != env('PAYMENT_ROOT_URL') )
         {
             dd('You ain\'t supposed to be here');
