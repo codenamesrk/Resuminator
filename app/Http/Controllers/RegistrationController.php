@@ -135,11 +135,10 @@ class RegistrationController extends Controller
             $user->save();
 
             $payment = new Payment();
-            $payment->user_id = $user->id;
             $payment->transaction_id = $response['txnid'];
             $payment->amount = $response['famount'];            
             $user->payments()->save($payment);
-            
+
         } else {
             return redirect()->route('user::payment.resume');            
         }
