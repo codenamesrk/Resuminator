@@ -119,9 +119,9 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
         //     dd('You ain\'t supposed to be here');
         // } else {            
             $this->response = $request->all();
-            $response_hash = $this->decrypt($response);
+            $response_hash = $this->decrypt($this->response);
 
-            if($response_hash != $this->response['txnref']){
+            if($response_hash != $this->response['hash']){
                 return 'Hash Mismatch Error';
             } else {
                 return $this->response; 
