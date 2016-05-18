@@ -130,14 +130,13 @@ class RegistrationController extends Controller
         // $response = Indipay::response($request);
 
         // dd($response);
-        $user = Auth::User();
+        $user = User::whereEmail($response['femail'])->first();
         $payment = new Payment();
         $payment->user_id = $user->id;
-        $payment->transaction_id = $request->txnid;
-        $payment->amount = $request->famout;            
+        $payment->transaction_id = $response['txnid'];
+        $payment->amount = $response['famount'];            
         $payment->save();
-        
-        dd($response);
+                
         return redirect()->route('user::invite.contacts');
     }
 
