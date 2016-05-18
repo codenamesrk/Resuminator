@@ -33,16 +33,15 @@ class RegisterResume
         //     'original_name' => $event->originalName,
         //     'parent' => $event->parent,            
         // ]);
+        $review = Review::whereName('not_reviewed')->first();
+
         $resume = new Resume();
         $resume->name = $event->fileAlias;
         $resume->original_name = $event->originalName;
         $resume->parent = $event->parent;
-        $resume->save();
-        
-        $review = Review::whereName('not_reviewed')->first();
-        $resume->review()->save($review);
-
+        $resume->review_id = $review->id;
         $event->user->resumes()->save($resume);
+        
         $payment = $event->user->payments()->get()->last();
         $payment->resume_id = $resume->id;
         $payment->save();
