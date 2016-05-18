@@ -4,8 +4,6 @@ namespace App\PaymentSupport\Itdprocess\Gateways;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use App\User;
 use App\Payment;
@@ -114,10 +112,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
     {
         // dd($request->server->get('SERVER_NAME'));
         // dd(Request::server('HTTP_REFERER'));
-        $this->refUrl = Request::server('HTTP_REFERER');
-        $refUrl1 = Request::server('PATH_INFO');
-        $refUrl2 = URL::previous();
-        dd($this->refUrl .'-'. $refUrl1 . '-' . $refUrl2 );        
+        dd($request . '-------' . $request->header('User-Agent'));
         if( $this->refUrl != env('PAYMENT_ROOT_URL') )
         {
             dd('You ain\'t supposed to be here');
