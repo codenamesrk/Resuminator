@@ -95,7 +95,8 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
         }
 
         $hash_string = trim($hash_string,'|');
-
+        $hash_string .= '|';     
+        $hash_string .= env('SITE_KEY');       
         return hash('sha512', $hash_string);        
     }
 
