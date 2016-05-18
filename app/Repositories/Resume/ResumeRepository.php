@@ -3,8 +3,11 @@
 namespace App\Repositories\Resume;
 
 use App\Resume;
+use App\Review;
 
 class ResumeRepository implements ResumeRepositoryInterface {
+
+	protected $review;
 
 	public function getAll()
 	{
@@ -18,12 +21,14 @@ class ResumeRepository implements ResumeRepositoryInterface {
 
 	public function getNew()
 	{
-		return Resume::where('review_id',1)->get();
+		$this->review = Review::whereName('not_reviewed')->first();
+		return Resume::where('review_id',$this->review->id)->get();
 	}
 
 	public function getPending()
 	{
-		return Resume::where('review_id',2)->get();
+		$this->review = Review::whereName('reviewing')->first();
+		return Resume::where('review_id',$this->review->id)->get();
 	}
 
 	public function getCount()

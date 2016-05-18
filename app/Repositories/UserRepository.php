@@ -7,6 +7,11 @@ use DB;
 use Carbon\Carbon;
 
 class UserRepository implements UserRepositoryInterface {
+	protected $admin;
+	public function __construct()
+	{
+		$this->admin = User::whereEmail('admin@superuser.com')->first();
+	}
 	public function getAll()
 	{
 		return User::all();
@@ -25,12 +30,12 @@ class UserRepository implements UserRepositoryInterface {
 		return User::findOrFail($id)->payments()->count();
 	}
 	public function getUserCount()
-	{
-		return User::where('id', '!=', 1)->count();
+	{		
+		return User::where('id', '!=', $this->admin->id)->count();
 	}
 	public function getPaidUsers()
 	{
-		return User::where('id', '!=', 1)->where('has_paid', 1)->count();
+		return User::where('id', '!=', $this->admin->id)->where('has_paid', 1)->count();
 	}	
 	public function getDropoffs($year)
 	{
@@ -50,7 +55,7 @@ class UserRepository implements UserRepositoryInterface {
 		return DB::table('users')
 				// ->where('created_at', '>=', $start)
 				// ->where('created_at', '<=', $end)
-				->where('users.id', '!=', 1)
+				->where('users.id', '!=', $this->admin->id)
 				->whereBetween('created_at', [$start,$end])
 				->select( DB::raw('MONTH(created_at) as month') , DB::raw('count(*) as subscribed'), DB::raw('SUM(has_paid) as paid'))
 				->groupBy('month')
