@@ -6,6 +6,7 @@ use App\Events\ResumeUploaded;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Resume;
+use App\Review;
 
 class RegisterResume
 {

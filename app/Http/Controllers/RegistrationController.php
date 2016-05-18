@@ -127,15 +127,22 @@ class RegistrationController extends Controller
     public function paymentResponse(Request $request)
     {        
         $response = Itdprocess::response($request);
-        // $response = Indipay::response($request);
+        
+        if($response['paymentstatus'] == 'success')
+        {
+            $user = User::whereEmail($response['femail'])->first();
+            $user->has_paid = 1;
+            $user->save();
 
-        // dd($response);
-        $user = User::whereEmail($response['femail'])->first();
-        $payment = new Payment();
-        $payment->user_id = $user->id;
-        $payment->transaction_id = $response['txnid'];
-        $payment->amount = $response['famount'];            
-        $payment->save();
+            $payment = new Payment();
+            $payment->user_id = $user->id;
+            $payment->transaction_id = $response['txnid'];
+            $payment->amount = $response['famount'];            
+            $user->payments()->save($payment);
+            
+        } else {
+            return redirect()->route('user::payment.resume');            
+        }
                 
         return redirect()->route('user::invite.contacts');
     }
