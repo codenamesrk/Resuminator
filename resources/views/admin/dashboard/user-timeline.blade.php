@@ -33,9 +33,9 @@
                     <ul class="timeline">
                         @foreach($user->resumes as $resume)
                         <li class="timeline-inverted">                            
-                            @if( $resume->review_id === 1 )
+                            @if( $resume->review->name == 'not_reviewed' )
                                 <div class="timeline-badge danger">        
-                            @elseif( $resume->review_id === 2 )
+                            @elseif( $resume->review_id == 'reviewing' )
                                 <div class="timeline-badge info">       
                             @else
                                 <div class="timeline-badge success">
@@ -53,9 +53,9 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="file_id" value="{{ $resume->original_name }}">
                                         <input type="hidden" name="type" value="resumes">
-                                    @if( $resume->review_id == 1 )
+                                    @if( $resume->review->name == 'not_reviewed' )
                                         <a href="{{ route('admin::dashboard.review', ['resume' => $resume->id ]) }}" class="btn btn-sm btn-danger pull-right">Review</a>                                        
-                                    @elseif( $resume->review_id == 2 )
+                                    @elseif( $resume->review_id == 'reviewing'  )
                                         <a href="{{ route('admin::dashboard.edit.report', ['report' => $resume->report->id ]) }}" class="btn btn-sm btn-info pull-right">Drafted</a>
                                     @else
                                         <button class="btn btn-sm btn-success pull-left">View Pdf</button>
