@@ -19,6 +19,7 @@ use App\Repositories\Parameter\ParameterRepositoryInterface;
 use App\User;
 use App\Report;
 use App\Resume;
+use App\Review;
 use App\Parameter;
 use App\Events\ReportGenerated;
 use Khill\Lavacharts\Lavacharts;
@@ -175,7 +176,7 @@ class AdminController extends Controller
         $report->parameters()->attach($params);
         
         $resume = Resume::find($request->resume_id);
-        $resume->review_id = 2;
+        $resume->review_id = Review::whereName('reviewing')->first()->id;
         $resume->save();
 
         return redirect()->route('admin::dashboard.showReport',[$report->id]);
@@ -260,7 +261,7 @@ class AdminController extends Controller
     public function generateReport(Request $request)
     {
         $resume = Resume::find($request->resume_id);
-        $resume->review_id = 3;
+        $resume->review_id = Review::whereName('reviewed')->first()->id;
         $resume->save();
 
         $user = User::findOrFail($resume->user_id);
