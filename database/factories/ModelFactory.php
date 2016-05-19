@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'verified' => $faker->boolean($chanceOfGettingTrue = 50),
         'last_login' => $faker->dateTime(),
         'ip' => $faker->ipv4,
-        'created_at' => $faker->dateTimeThisYear($max = 'now'),
+        'created_at' => $faker->dateTimeBetween($startDate = '+1months', $endDate = '+7months'),
         'has_paid' => $faker->boolean($chanceOfGettingTrue = 50),
     ];
 });

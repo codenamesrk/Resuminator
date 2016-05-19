@@ -15,7 +15,7 @@ class ReportEditable
      */
     public function handle($request, Closure $next)
     {
-        if($request->report->resume->review_id === 2)
+        if($request->report->resume->review->name == 'reviewing')
         {
             return $next($request);
         }

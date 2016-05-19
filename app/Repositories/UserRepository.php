@@ -44,8 +44,8 @@ class UserRepository implements UserRepositoryInterface {
 		// return DB::table('users')
 		// 	->select('users.has_paid','users.created_at')
 		// 	->get();
-		$start = Carbon::createFromDate($year, 1, 1);
-		$end = Carbon::createFromDate($year, 12, 31);
+		$start = Carbon::createFromDate(2016, 1, 1);
+		$end = Carbon::createFromDate(2016, 12, 31);
 		// return $start;
 		// return DB::table('users')
 		// 		->where('created_at', '>=', $start)

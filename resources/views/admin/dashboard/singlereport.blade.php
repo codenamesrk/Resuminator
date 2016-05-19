@@ -80,25 +80,23 @@
                             </tbody>
                         </table>
                         <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
-                        @if($report->resume->review_id === 2)
+                        @if($report->resume->review->name == "reviewing")
                         <a class="btn btn-danger pull-right" href="{{ route('admin::dashboard.edit.report',[$report->id]) }}">Edit</a>
                         @endif
                     </div>                    
                 </div>
                 <!-- /.panel-body -->
                 <div class="well">
-                @if(!$report->resume->review->name == 'reviewed')
-                
+                @if($report->resume->review->name == 'reviewed')                
+                <h6>Report Submitted to User</h6>                     
+                @else
                     <form action="{{ route('admin::dashboard.generate.report') }}" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="resume_id" value="{{ $report->resume->id }}">
                         <input type="hidden" name="report_id" value="{{ $report->id }}">
                         <input class="btn btn-danger btn-sm" type="submit" value="Generate Report" {{ $report->file ? '' : 'disabled' }}>
                         <small> Generate once all edits are done and report file is attached. </small>
-                    </form>
-                     
-                @else
-                <h6>Report Submitted to User</h6>
+                    </form>                
                 @endif
                 </div>            
             </div>
