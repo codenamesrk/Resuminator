@@ -143,18 +143,18 @@ class AdminController extends Controller
     {           
         
         // $number = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
-
+        
         $paramCount = $this->parameter->getCount();
         $totalScore = 0;
         $index = 0;
         
+
         // Parameters to be filled     
         foreach ($request->parameter as $param => $score) {          
-            $params[++$param] = ['score' => $score, 'remark' => $request->remarks[$index++]];
+            $params[$param] = ['score' => $score, 'remark' => $request->remarks[$index++]];
             $totalScore+=$score;           
         }
 
-        
 
         if(isset($request->rep_file)) {
             $number = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
@@ -223,16 +223,15 @@ class AdminController extends Controller
 
     public function postEditReport(Request $request)
     {
-        // dd($request->all());
         $paramCount = Parameter::count();
         $totalScore = 0;   
         $index = 0;
         // Parameters to be filled     
         foreach ($request->parameter as $param => $score) {          
-            $params[++$param] = ['score' => $score, 'remark' => $request->remarks[$index++]];
+            $params[$param] = ['score' => $score, 'remark' => $request->remarks[$index++]];
             $totalScore+=$score;           
         }
-        
+
         if(isset($request->rep_file)) {
             $number = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
             $count = $this->report->getCount();
@@ -249,7 +248,7 @@ class AdminController extends Controller
         $report->gen_remark = $request->gen_remark;
         $report->file = $request->rep_file ? $fileName : null;
         $report->save();
-        
+
         $report->parameters()->sync($params);
 
         return redirect()->route('admin::dashboard.showReport',[$request->report_id]);

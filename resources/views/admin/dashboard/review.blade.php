@@ -55,7 +55,7 @@
                             <div class="row">
                             <div class="form-group col-sm-2">
                                 <label class="control-label" for="inputSuccess">{{ $parameter->name }}</label>
-                                <input type="number" class="form-control" name="parameter[]" min="1" max="100" value="{{ $parameter->score }}">
+                                <input type="number" class="form-control" name="parameter[{{ $parameter->id }}]" min="1" max="100" value="{{ $parameter->score }}">
                             </div>
                             <div class="form-group col-sm-10">
                                 <label class="control-label">Remark</label>
