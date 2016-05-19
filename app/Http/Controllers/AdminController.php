@@ -154,7 +154,7 @@ class AdminController extends Controller
             $totalScore+=$score;           
         }
 
-        dd($params);
+        
 
         if(isset($request->rep_file)) {
             $number = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
@@ -173,7 +173,7 @@ class AdminController extends Controller
         $report->score = $totalScore;
         $report->gen_remark = $request->gen_remark;
         $report->file = $request->rep_file ? $fileName : null;
-        
+        $report->save();
 
         $report->parameters()->attach($params);
         
@@ -248,7 +248,8 @@ class AdminController extends Controller
         $report->score = $totalScore;
         $report->gen_remark = $request->gen_remark;
         $report->file = $request->rep_file ? $fileName : null;
-
+        $report->save();
+        
         $report->parameters()->sync($params);
 
         return redirect()->route('admin::dashboard.showReport',[$request->report_id]);
