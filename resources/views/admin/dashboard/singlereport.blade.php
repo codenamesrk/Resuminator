@@ -87,7 +87,7 @@
                 </div>
                 <!-- /.panel-body -->
                 <div class="well">
-                @if($report->resume->review->name == 'not_reviewed' || $report->resume->review->name == 'reviewing')
+                @if(!$report->resume->review->name == 'reviewed')
                 
                     <form action="{{ route('admin::dashboard.generate.report') }}" method="post">
                         {{ csrf_field() }}

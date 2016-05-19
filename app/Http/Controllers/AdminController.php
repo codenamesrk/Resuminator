@@ -154,6 +154,8 @@ class AdminController extends Controller
             $totalScore+=$score;           
         }
 
+        dd($params);
+
         if(isset($request->rep_file)) {
             $number = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
             $count = $this->report->getCount();
@@ -165,13 +167,13 @@ class AdminController extends Controller
             Storage::put('reports/' . $fileName . '.' . $extension, File::get($file));
         }
 
-        $report = Report::create([
-            'user_id' => $request->user_id,
-            'resume_id' => $request->resume_id,
-            'score' => $totalScore,
-            'gen_remark' => $request->gen_remark,
-            'file' => $request->rep_file ? $fileName : null,
-        ]);
+        $report = new Report();
+        $report->user_id = $request->user_id;
+        $report->resume_id = $request->resume_id;
+        $report->score = $totalScore;
+        $report->gen_remark = $request->gen_remark;
+        $report->file = $request->rep_file ? $fileName : null;
+        
 
         $report->parameters()->attach($params);
         
@@ -243,11 +245,10 @@ class AdminController extends Controller
         }
 
         $report = Report::find($request->report_id);
-        $report->update([
-            'score' => $totalScore,
-            'gen_remark' => $request->gen_remark,
-            'file' => $request->rep_file ? $fileName : null,
-        ]);
+        $report->score = $totalScore;
+        $report->gen_remark = $request->gen_remark;
+        $report->file = $request->rep_file ? $fileName : null;
+
         $report->parameters()->sync($params);
 
         return redirect()->route('admin::dashboard.showReport',[$request->report_id]);
