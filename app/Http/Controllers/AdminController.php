@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\Resume\ResumeRepositoryInterface;
 use App\Repositories\Report\ReportRepositoryInterface;
