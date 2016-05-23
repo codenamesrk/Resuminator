@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\Resume\ResumeRepositoryInterface;
 use App\Repositories\Report\ReportRepositoryInterface;
@@ -26,6 +27,7 @@ use Khill\Lavacharts\Lavacharts;
 use Carbon\Carbon;
 use Softon\Indipay\Facades\Indipay;
 use Alert;
+use Redis;
 
 class AdminController extends Controller
 {
@@ -352,7 +354,16 @@ class AdminController extends Controller
         // $response->header('Content-Type', 'application/pdf');
         // return $response;
         // dd(generateFile($type,$file,$fileCount,$totalCount));
-        return view('form-check');
+        // return view('form-check');
+        $user = Auth::user();
+        Redis::hmset('user:' . $user->id, [
+            'id' => $user->id,
+            'email' => $user->email,
+            'fname' => $user->profile->first_name,
+        ]);
+        
+
+        // return 'boo';
     }
     public function testPost(Request $request)
     {
