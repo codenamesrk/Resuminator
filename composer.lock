@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7910104230a337c53352aec52ed54046",
-    "content-hash": "b722c1d3f622ae4c3c24e037b9c28e87",
+    "hash": "74e07308abab5d3ec0ffa79186175816",
+    "content-hash": "601fb602027709593cf521c27f779679",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1824,6 +1824,56 @@
             "time": "2015-10-02 06:51:40"
         },
         {
+            "name": "predis/predis",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "84060b9034d756b4d79641667d7f9efe1aeb8e04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/84060b9034d756b4d79641667d7f9efe1aeb8e04",
+                "reference": "84060b9034d756b4d79641667d7f9efe1aeb8e04",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete PHP client library for Redis",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2015-07-30 18:34:15"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0",
             "source": {
@@ -2352,50 +2402,6 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2015-06-21 13:59:46"
-        },
-        {
-            "name": "softon/indipay",
-            "version": "v1.0.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/softon/indipay.git",
-                "reference": "15ebaa2cba69dfa90b26b33cf23b52c73a59027f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/softon/indipay/zipball/15ebaa2cba69dfa90b26b33cf23b52c73a59027f",
-                "reference": "15ebaa2cba69dfa90b26b33cf23b52c73a59027f",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~5.0|~6.0",
-                "illuminate/support": "~5.0|~6.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Softon\\Indipay\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Shiburaj",
-                    "email": "powerupneo@gmail.com"
-                }
-            ],
-            "description": "The Laravel 5 Package for Indian Payment Gateways. Currently supported gateways: CCAvenue, PayUMoney, EBS, CitrusPay",
-            "keywords": [
-                "Indian Payment Gateways",
-                "ccavenue",
-                "laravel 5",
-                "payumoney"
-            ],
-            "time": "2016-04-08 14:08:56"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3819,6 +3825,50 @@
                 "testing"
             ],
             "time": "2015-04-02 19:54:00"
+        },
+        {
+            "name": "softon/indipay",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/softon/indipay.git",
+                "reference": "15ebaa2cba69dfa90b26b33cf23b52c73a59027f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/softon/indipay/zipball/15ebaa2cba69dfa90b26b33cf23b52c73a59027f",
+                "reference": "15ebaa2cba69dfa90b26b33cf23b52c73a59027f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5.0|~6.0",
+                "illuminate/support": "~5.0|~6.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Softon\\Indipay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shiburaj",
+                    "email": "powerupneo@gmail.com"
+                }
+            ],
+            "description": "The Laravel 5 Package for Indian Payment Gateways. Currently supported gateways: CCAvenue, PayUMoney, EBS, CitrusPay",
+            "keywords": [
+                "Indian Payment Gateways",
+                "ccavenue",
+                "laravel 5",
+                "payumoney"
+            ],
+            "time": "2016-04-08 14:08:56"
         }
     ],
     "aliases": [],
