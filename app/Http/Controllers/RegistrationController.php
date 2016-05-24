@@ -129,7 +129,7 @@ class RegistrationController extends Controller
 
     public function paymentResponse(Request $request)
     {        
-        dd($request);
+        
         $response = Itdprocess::response($request);
         
         if($response['paymentstatus'] == 'success')
