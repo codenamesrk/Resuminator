@@ -16,6 +16,8 @@ use App\Role;
 use App\Payment;
 use Softon\Indipay\Facades\Indipay;
 use App\PaymentSupport\Itdprocess\Facades\Itdprocess;
+use Redis;
+use Cache;
 
 class RegistrationController extends Controller
 {
@@ -82,6 +84,7 @@ class RegistrationController extends Controller
         // dd($request->all());
         $user = Auth::User();
         $parameters = [
+            'id' => $user->id,
             'fname' => $request->fname,
             'fphone' => $request->fphone,
             'femail' => $request->femail,
@@ -121,16 +124,24 @@ class RegistrationController extends Controller
         // // $payment->transaction_id = $txnid;            
         // // $payment->save();
         
-        // // return redirect()->route('user::invite.contacts');
+        // return redirect()->route('user::invite.contacts');
     }
 
     public function paymentResponse(Request $request)
     {        
+        dd($request);
         $response = Itdprocess::response($request);
         
         if($response['paymentstatus'] == 'success')
         {
-            $user = User::whereEmail($response['femail'])->first();
+            $cached = Redis::hgetall('order:' . $response['orderid']);
+            
+            if(!empty($cached)) {
+                $user = User::findOrFail($cached['id']);
+            } else {
+                $user = User::whereEmail($response['femail'])->first();    
+            }
+            
             $user->has_paid = 1;
             $user->save();
 
@@ -138,6 +149,7 @@ class RegistrationController extends Controller
             $payment->transaction_id = $response['txnid'];
             $payment->amount = $response['famount'];            
             $user->payments()->save($payment);
+            Redis::del('order:' . $response['orderid']);
 
         } else {
             return redirect()->route('user::payment.resume');            

@@ -83,7 +83,7 @@ class Kernel extends HttpKernel
         ],
         'adminCheck' => [
             \App\Http\Middleware\AdminCheck::class,  
-        ]
+        ],
     ];
 
     /**

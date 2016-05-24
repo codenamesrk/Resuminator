@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use App\User;
 use App\Payment;
+use Redis;
+use Cache;
 
 class PayUMoneyGateway implements PaymentGatewayInterface {
 
@@ -34,11 +36,17 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
         $this->parameters = array_merge($this->parameters,$parameters);
         $this->checkParameters($this->parameters);
         $this->encrypt();
+        // dd($this);
+        Redis::hmset('order:' . $this->parameters['orderid'], [
+            'id' => $this->parameters['id'],
+            'email' => $this->parameters['femail'],
+        ]);        
         return $this;
     }
 
     public function send()
-    {        
+    {               
+
         Log::info('Payment Request towards Itdprocess Initiated: ');
         return view('user.payumoney')->with('parameters',$this->parameters)
                                      ->with('endPoint',$this->getEndPoint());        
@@ -84,6 +92,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
 
     protected function decrypt($response)
     {
+        dd($response);
         $hashSequence = "fname|fphone|femail|famount|orderid|txnid|paymentstatus|payuMoneyId|sitekey";
         // $hashSequence = "sitekey|famount|productinfo|fname|femail";
         $hashVarsSeq = explode('|', $hashSequence);

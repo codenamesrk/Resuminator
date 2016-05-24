@@ -61,10 +61,9 @@ Route::group(['domain' => env('CLIENT_URL','pregnancy.ly'), 'as' => 'user::' ], 
 		Route::get('report/{report}', [ 'as' => 'report', 'uses' => 'UserController@getReport']);
 		Route::post('report/file/{file}', [ 'as' => 'report.file', 'uses' => 'UserController@getFile' ]);
 	});
-
-	Route::group([], function(){		
-		Route::post('payment/response', [ 'as' => 'payment.response', 'uses' => 'RegistrationController@paymentResponse' ]);
-	});
+			
+	Route::post('payment/response', ['middleware' => 'cors', 'as' => 'payment.response', 'uses' => 'RegistrationController@paymentResponse' ]);
+	
 });
 
 
