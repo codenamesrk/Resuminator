@@ -91,7 +91,7 @@ class RegistrationController extends Controller
             'famount' => 1500,
         ];
         $order = Itdprocess::prepare($parameters);       
-        dd($order);
+
         return Itdprocess::process($order);        
 
     }
