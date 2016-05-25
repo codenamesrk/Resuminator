@@ -18,6 +18,7 @@ use Softon\Indipay\Facades\Indipay;
 use App\PaymentSupport\Itdprocess\Facades\Itdprocess;
 use Redis;
 use Cache;
+use OAuth;
 
 class RegistrationController extends Controller
 {
@@ -138,7 +139,7 @@ class RegistrationController extends Controller
         $code = $request->get('code');
 
         // get google service
-        $googleService = \OAuth::consumer('Google');
+        $googleService = OAuth::consumer('Google');
 
         // check if code is valid
 
@@ -148,7 +149,7 @@ class RegistrationController extends Controller
             $token = $googleService->requestAccessToken($code);
            
             // Send a request with it
-            $result = json_decode($googleService->request('https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=10'), true);
+            $result = json_decode($googleService->request('https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=20'), true);
 
             // Going through the array to clear it and create a new clean array with only the email addresses
             $emails = []; 
@@ -168,18 +169,20 @@ class RegistrationController extends Controller
             }
             
             // Test Code
-            // $photo_val = $googleService->request('https://www.google.com/m8/feeds/photos/media/srijit777%40gmail.com/e9e20899252dd');
-            // $imgData = base64_encode($photo_val);
-            // $image ='data:image/jpeg;base64,'.$imgData .'';
-            // echo '<img src="' . $image . '">';
+            $photo_val = $googleService->request('https://www.google.com/m8/feeds/photos/media/srijit777%40gmail.com/e9e20899252dd');
+            $imgData = base64_encode($photo_val);
+            $image ='data:image/jpeg;base64,'.$imgData .'';
+            echo '<img src="' . $image . '">';
 
             // Display Results
-            // foreach ($emails as $key => $email) {
-            //   echo 'No: ' . $key . '<br>';
-            //   echo 'Title: ' . $email['title'] .'<br>';
-            //   echo 'Email: ' . $email['email'] . '<br>';  
-            //   echo 'Picture: <img src="' . $email['link'] . '"> <br>';  
-            // }
+            foreach ($emails as $key => $email) {
+              echo 'No: ' . $key . '<br>';
+              echo 'Title: ' . $email['title'] .'<br>';
+              echo 'Email: ' . $email['email'] . '<br>';  
+              echo 'Picture: <img src="' . $email['link'] . '"> <br>';  
+            }
+
+            echo '<a href="/upload">to upload</a>';
             
         }
         
@@ -192,7 +195,7 @@ class RegistrationController extends Controller
             return redirect((string)$url);
         }
 
-        return redirect()->route('user::upload.resume');
+        // return redirect()->route('user::upload.resume');
     } 
 
     public function upload()

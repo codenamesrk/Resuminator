@@ -11,7 +11,7 @@ return [
 	/**
 	 * Storage
 	 */
-	'storage' => 'Session',
+	// 'storage' => 'Session',
 
 	/**
 	 * Consumers

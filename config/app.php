@@ -161,7 +161,6 @@ return [
         Artdarek\OAuth\OAuthServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         App\Providers\PaymentServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*
