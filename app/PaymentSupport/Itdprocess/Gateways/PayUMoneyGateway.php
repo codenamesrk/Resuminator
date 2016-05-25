@@ -23,12 +23,13 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
 
     function __construct()
     {
-        $this->parameters['sitekey'] = env('SITE_KEY');
+        $this->parameters['sitekey'] = env('SITE_KEY');        
         $txnid = $this->generateTransactionID();
         $this->testMode = env('PAYMENT_TEST_MODE');
         $this->liveEndPoint = env('PAYMENT_LIVE_ENDPOINT');
         $this->testEndPoint = env('PAYMENT_TEST_ENDPOINT');        
         $this->parameters['orderid'] = $this->generateOrderID($txnid);
+        $this->parameters['domainref'] = $this->generateOrderIdHash($this->parameters['orderid']);
     }
 
     public function request($parameters)
@@ -40,6 +41,7 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
         Redis::hmset('order:' . $this->parameters['orderid'], [
             'id' => $this->parameters['id'],
             'email' => $this->parameters['femail'],
+            'domainref' => $this->parameters['domainref'],
         ]);        
         return $this;
     }
@@ -119,26 +121,26 @@ class PayUMoneyGateway implements PaymentGatewayInterface {
         return date("Y")."/".date("m")."/".date("d")."/".$txnid;
     }
 
-    public function response($request)
+    public function generateOrderIdHash($orderid)
     {
-        // dd($request->server->get('SERVER_NAME'));
-        // dd(Request::server('HTTP_REFERER'));
-        // dd(isset($_SERVER['HTTP_REFERER']) . '-' . isset($_SERVER['PATH_INFO']) .'-' . isset($_SERVER['ORIG_PATH_INFO']));
-        // if( $this->refUrl != env('PAYMENT_ROOT_URL') )
-        // {
-        //     dd('You ain\'t supposed to be here');
-        // } else {            
-            $this->response = $request->all();
-            $response_hash = $this->decrypt($this->response);
+        $hashorder = $orderid . env('SALT');
+        return strtolower(hash('sha512', $hashorder));
+    }    
 
-            if($response_hash != $this->response['txnref']){
-                return 'Hash Mismatch Error';
-            } else {
-                return $this->response; 
-            }
-                       
-        // }     
+    public function response($request)
+    {         
+
+        $this->response = $request->all();
         
+        // Verfied Domain
+        $response_hash = $this->decrypt($this->response);
+
+        if($response_hash != $this->response['txnref']){
+            return 'Hash Mismatch Error';
+        } else {
+            return $this->response; 
+        }
+
     }         
 
 }
