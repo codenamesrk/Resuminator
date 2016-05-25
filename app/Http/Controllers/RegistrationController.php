@@ -167,19 +167,12 @@ class RegistrationController extends Controller
                     ];
                 }
             }
-            
-            // Test Code
-            $photo_val = $googleService->request('https://www.google.com/m8/feeds/photos/media/srijit777%40gmail.com/e9e20899252dd');
-            $imgData = base64_encode($photo_val);
-            $image ='data:image/jpeg;base64,'.$imgData .'';
-            echo '<img src="' . $image . '">';
 
             // Display Results
             foreach ($emails as $key => $email) {
               echo 'No: ' . $key . '<br>';
               echo 'Title: ' . $email['title'] .'<br>';
-              echo 'Email: ' . $email['email'] . '<br>';  
-              echo 'Picture: <img src="' . $email['link'] . '"> <br>';  
+              echo 'Email: ' . $email['email'] . '<br>';   
             }
 
             echo '<a href="/upload">to upload</a>';
